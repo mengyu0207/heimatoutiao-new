@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div @click="goArticle">
     <!-- 渲染无图片 -->
     <van-cell
       v-if="articleInfo.cover.type"
@@ -55,6 +55,11 @@ export default {
       const art = this.articleInfo
       const relativeTime = dayjs(art.pubdate).fromNow()
       return `${art.aut_name}${art.comm_count}评论${relativeTime}`
+    }
+  },
+  methods: {
+    goArticle () {
+      this.$router.push('/article')
     }
   }
 }

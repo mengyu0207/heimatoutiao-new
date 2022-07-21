@@ -1,21 +1,10 @@
 <template>
   <div>
     <van-cell title="搜索历史">
-      <span>全部删除</span>
-      <span>完成</span>
-      <van-icon name="delete-o" />
+      <van-icon name="delete-o" @click="clearFn" />
     </van-cell>
-    <van-cell title="hello">
-      <van-icon name="close" />
-    </van-cell>
-    <van-cell title="hello">
-      <van-icon name="close" />
-    </van-cell>
-    <van-cell title="hello">
-      <van-icon name="close" />
-    </van-cell>
-    <van-cell title="hello">
-      <van-icon name="close" />
+    <van-cell :title="item" v-for="(item, index) in histroy" :key="index">
+      <van-icon name="close"></van-icon>
     </van-cell>
   </div>
 </template>
@@ -25,11 +14,21 @@ export default {
   data () {
     return {}
   },
+  props: {
+    histroy: {
+      type: Array,
+      required: true
+    }
+  },
   components: {},
   computed: {},
   beforeMount () {},
   mounted () {},
-  methods: {},
+  methods: {
+    clearFn () {
+      this.$emit('clearFn', [])
+    }
+  },
   watch: {}
 }
 </script>

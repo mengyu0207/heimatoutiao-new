@@ -18,7 +18,7 @@
       :keywords="keywords"
       @search="onSearch"
     />
-    <SearchHistory v-else />
+    <SearchHistory v-else :histroy="histroy" @clearFn="clearFn" />
     <!-- <component :is="componentName" :keywords="keywords"></component> -->
   </div>
 </template>
@@ -31,12 +31,31 @@ export default {
   data () {
     return {
       keywords: '',
-      isShowSearchResults: false // 控制搜索结果的展示
+      isShowSearchResults: false, // 控制搜索结果的展示
+      histroy: JSON.parse(localStorage.getItem('his')) || [] // 搜索历史
     }
   },
   computed: {},
+  watch: {
+    keywords: {
+      deep: true,
+      handler () {
+        const theSet = new Set(this.histroy)
+        console.log(theSet)
+        const arr = [...theSet]
+        localStorage.setItem('his', JSON.stringify(arr))
+      }
+    }
+  },
   methods: {
+    clearFn (val) {
+      this.histroy = val
+    },
     onSearch (val) {
+      if (this.keywords.length > 0) {
+        this.histroy.push(val)
+      }
+
       this.keywords = val
       console.log(val)
       this.isShowSearchResults = true
