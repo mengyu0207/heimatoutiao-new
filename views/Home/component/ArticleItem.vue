@@ -44,6 +44,9 @@
 import dayjs from '@/utlis/dayjs'
 export default {
   name: 'ArticleItem',
+  created () {
+    console.log(this.articleInfo)
+  },
   props: {
     articleInfo: {
       type: Object,
@@ -59,7 +62,7 @@ export default {
   },
   methods: {
     goArticle () {
-      this.$router.push('/article')
+      this.$router.push(`article/${this.articleInfo.art_id}`)
     }
   }
 }
