@@ -20,8 +20,9 @@ export default {
       loading: false,
       finished: false,
       offset: null,
-      limit: 10
+      limit: 10,
       //   list: []
+      localList: this.list
     }
   },
   props: {
@@ -53,7 +54,7 @@ export default {
         console.log(data)
         // push 数据
         const { results } = data.data
-        this.list.push(...results)
+        this.localList.push(...results)
         // 把数据传到父组件
         this.$emit('onload_success', data.data)
         //
